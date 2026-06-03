@@ -29,8 +29,8 @@ export default function PurchaseOrders() {
       if (search) params.append('search', search);
       if (statusFilter) params.append('status', statusFilter);
       const res = await api.get(`/purchase-orders?${params.toString()}`);
-      setItems(res.data.items);
-      setPagination(res.data.pagination);
+      setItems((res.data.data?.data || res.data.data?.items || []));
+      setPagination((res.data.data?.pagination || { page: 1, totalPages: 1 }));
     } catch (err) { console.error(err); } finally { setLoading(false); }
   };
 

@@ -24,8 +24,8 @@ export default function AuditLogs() {
       if (dateFrom) params.append('date_from', dateFrom);
       if (dateTo) params.append('date_to', dateTo);
       const res = await api.get(`/audit-logs?${params.toString()}`);
-      setItems(res.data.items);
-      setPagination(res.data.pagination);
+      setItems((res.data.data?.data || res.data.data?.items || []));
+      setPagination((res.data.data?.pagination || { page: 1, totalPages: 1 }));
     } catch (err) { console.error(err); } finally { setLoading(false); }
   };
 
