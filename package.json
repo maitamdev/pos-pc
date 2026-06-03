@@ -1,0 +1,24 @@
+{
+  "name": "computer-pos-system",
+  "version": "1.0.0",
+  "description": "Computer POS - Hệ thống quản lý cửa hàng máy tính",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "archiver": "^8.0.0",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
+    "jsbarcode": "^3.12.3",
+    "mysqldump": "^3.2.0",
+    "qrcode.react": "^4.2.0"
+  }
+}
