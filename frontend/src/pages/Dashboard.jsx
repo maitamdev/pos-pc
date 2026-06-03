@@ -14,7 +14,7 @@ export default function Dashboard() {
   const loadDashboard = async () => {
     try {
       const res = await api.get('/reports/dashboard');
-      setData(res.data.data);
+      setData(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) {
       console.error('Dashboard error:', err);
     } finally {

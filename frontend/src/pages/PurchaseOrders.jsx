@@ -85,7 +85,7 @@ export default function PurchaseOrders() {
       loadData(pagination.page);
       if (viewItem?.id === id) {
         const res = await api.get(`/purchase-orders/${id}`);
-        setViewItem(res.data.data);
+        setViewItem(res.data.data?.data || res.data.data?.items || res.data.data);
       }
     } catch (err) { toast.error(err.response?.data?.message || 'Lỗi nhập kho'); }
   };
@@ -102,7 +102,7 @@ export default function PurchaseOrders() {
   const viewDetail = async (id) => {
     try {
       const res = await api.get(`/purchase-orders/${id}`);
-      setViewItem(res.data.data);
+      setViewItem(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { console.error(err); }
   };
 

@@ -21,8 +21,8 @@ export default function Inventory() {
         api.get('/products'),
         api.get('/inventory/alerts'),
       ]);
-      setProducts(prodRes.data.data);
-      setAlerts(alertRes.data.data);
+      setProducts(prodRes.data.data?.data || prodRes.data.data?.items || prodRes.data.data);
+      setAlerts(alertRes.data.data?.data || alertRes.data.data?.items || alertRes.data.data);
     } catch (err) { console.error(err); } finally { setLoading(false); }
   };
 

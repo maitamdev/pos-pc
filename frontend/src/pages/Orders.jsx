@@ -119,7 +119,7 @@ export default function Orders() {
       loadData();
       // Show order detail after creation
       if (res.data?.data) {
-        setOrderDetail(res.data.data);
+        setOrderDetail(res.data.data?.data || res.data.data?.items || res.data.data);
         setShowDetail(true);
       }
     } catch (err) {
@@ -164,7 +164,7 @@ export default function Orders() {
   const handleViewDetail = async (id) => {
     try {
       const res = await api.get(`/orders/${id}`);
-      setOrderDetail(res.data.data);
+      setOrderDetail(res.data.data?.data || res.data.data?.items || res.data.data);
       setShowDetail(true);
     } catch (err) {
       toast.error('Không thể tải chi tiết đơn hàng');

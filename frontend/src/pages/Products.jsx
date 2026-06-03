@@ -32,9 +32,9 @@ export default function Products() {
         api.get('/categories'),
         api.get('/suppliers'),
       ]);
-      setProducts(prodRes.data.data);
-      setCategories(catRes.data.data);
-      setSuppliers(supRes.data.data);
+      setProducts(prodRes.data.data?.data || prodRes.data.data?.items || prodRes.data.data);
+      setCategories(catRes.data.data?.data || catRes.data.data?.items || catRes.data.data);
+      setSuppliers(supRes.data.data?.data || supRes.data.data?.items || supRes.data.data);
     } catch (err) {
       console.error(err);
     } finally {
@@ -48,7 +48,7 @@ export default function Products() {
       if (search) params.append('search', search);
       if (filterCategory) params.append('category_id', filterCategory);
       const res = await api.get(`/products?${params}`);
-      setProducts(res.data.data);
+      setProducts(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { console.error(err); }
   };
 

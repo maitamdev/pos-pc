@@ -14,7 +14,7 @@ export default function OrderDetail() {
 
   useEffect(() => {
     api.get(`/orders/${id}`)
-      .then((res) => setOrder(res.data.data))
+      .then((res) => setOrder(res.data.data?.data || res.data.data?.items || res.data.data))
       .catch(() => addToast('Không tìm thấy hóa đơn', 'error'))
       .finally(() => setLoading(false));
   }, [id]);

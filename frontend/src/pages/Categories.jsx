@@ -18,7 +18,7 @@ export default function Categories() {
   const loadData = async () => {
     try {
       const res = await api.get('/categories');
-      setCategories(res.data.data);
+      setCategories(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { console.error(err); } finally { setLoading(false); }
   };
 

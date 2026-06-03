@@ -34,10 +34,10 @@ export default function Reports() {
         api.get(`/reports/employee-revenue${qs ? '?' + qs : ''}`),
         api.get(`/reports/category-revenue${qs ? '?' + qs : ''}`),
       ]);
-      setRevenue(revRes.data.data);
-      setTopProducts(topRes.data.data);
-      setEmployeeRevenue(empRes.data.data);
-      setCategoryRevenue(catRes.data.data);
+      setRevenue(revRes.data.data?.data || revRes.data.data?.items || revRes.data.data);
+      setTopProducts(topRes.data.data?.data || topRes.data.data?.items || topRes.data.data);
+      setEmployeeRevenue(empRes.data.data?.data || empRes.data.data?.items || empRes.data.data);
+      setCategoryRevenue(catRes.data.data?.data || catRes.data.data?.items || catRes.data.data);
       // Load new reports
       const [profitRes, rfmRes, agingRes, payRes] = await Promise.all([
         api.get(`/reports/profit${qs ? '?' + qs : ''}`).catch(() => ({ data: { data: null } })),
@@ -45,10 +45,10 @@ export default function Reports() {
         api.get('/reports/inventory-aging').catch(() => ({ data: { data: null } })),
         api.get(`/reports/payment-methods${qs ? '?' + qs : ''}`).catch(() => ({ data: { data: [] } })),
       ]);
-      setProfitData(profitRes.data.data);
-      setRfmData(rfmRes.data.data);
-      setAgingData(agingRes.data.data);
-      setPaymentData(payRes.data.data);
+      setProfitData(profitRes.data.data?.data || profitRes.data.data?.items || profitRes.data.data);
+      setRfmData(rfmRes.data.data?.data || rfmRes.data.data?.items || rfmRes.data.data);
+      setAgingData(agingRes.data.data?.data || agingRes.data.data?.items || agingRes.data.data);
+      setPaymentData(payRes.data.data?.data || payRes.data.data?.items || payRes.data.data);
     } catch (err) { console.error(err); } finally { setLoading(false); }
   };
 

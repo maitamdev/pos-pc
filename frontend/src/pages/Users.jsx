@@ -18,7 +18,7 @@ export default function Users() {
   const loadData = async () => {
     try {
       const res = await api.get('/users');
-      setUsers(res.data.data);
+      setUsers(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { console.error(err); } finally { setLoading(false); }
   };
 

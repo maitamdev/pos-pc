@@ -18,7 +18,7 @@ export default function Suppliers() {
   const loadData = async () => {
     try {
       const res = await api.get('/suppliers');
-      setSuppliers(res.data.data);
+      setSuppliers(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { console.error(err); } finally { setLoading(false); }
   };
 

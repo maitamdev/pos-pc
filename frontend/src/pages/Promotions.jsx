@@ -21,7 +21,7 @@ export default function Promotions() {
   const loadData = async () => {
     try {
       const res = await api.get('/promotions');
-      setPromotions(res.data.data);
+      setPromotions(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { console.error(err); } finally { setLoading(false); }
   };
 

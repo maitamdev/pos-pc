@@ -11,7 +11,7 @@ export default function LowStockAlerts() {
   const load = async () => {
     try {
       const res = await api.get('/inventory/low-stock-alerts');
-      setAlerts(res.data.data);
+      setAlerts(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch { addToast('Lỗi tải cảnh báo', 'error'); }
     finally { setLoading(false); }
   };

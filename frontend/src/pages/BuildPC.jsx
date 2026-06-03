@@ -34,7 +34,7 @@ export default function BuildPC() {
       const payload = {};
       Object.entries(selected).forEach(([k, v]) => { if (v) payload[`${k}_id`] = parseInt(v); });
       const res = await api.post('/ai/build-pc', payload);
-      setResult(res.data.data);
+      setResult(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { toast.error(err.response?.data?.message || 'Lỗi kiểm tra'); } finally { setChecking(false); }
   };
 
@@ -42,7 +42,7 @@ export default function BuildPC() {
     if (!productId) { setSuggestions(null); return; }
     try {
       const res = await api.get(`/ai/suggest/${productId}`);
-      setSuggestions(res.data.data);
+      setSuggestions(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { console.error(err); }
   };
 

@@ -20,7 +20,7 @@ export default function Customers() {
   const loadData = async () => {
     try {
       const res = await api.get('/customers');
-      setCustomers(res.data.data);
+      setCustomers(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { console.error(err); } finally { setLoading(false); }
   };
 
@@ -48,7 +48,7 @@ export default function Customers() {
   const viewLoyaltyHistory = async (customer) => {
     try {
       const res = await api.get(`/customers/${customer.id}/loyalty-history`);
-      setLoyaltyHistory(res.data.data);
+      setLoyaltyHistory(res.data.data?.data || res.data.data?.items || res.data.data);
       setLoyaltyCustomer(customer);
     } catch (err) { console.error(err); }
   };

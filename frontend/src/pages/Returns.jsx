@@ -94,7 +94,7 @@ export default function Returns() {
   const viewDetail = async (id) => {
     try {
       const res = await api.get(`/returns/${id}`);
-      setViewItem(res.data.data);
+      setViewItem(res.data.data?.data || res.data.data?.items || res.data.data);
     } catch (err) { console.error(err); }
   };
 
