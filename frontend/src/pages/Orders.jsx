@@ -41,12 +41,20 @@ export default function Orders() {
         api.get('/customers'),
         api.get('/orders'),
       ]);
-      setProducts(prodRes.data.data);
-      setFilteredProducts(prodRes.data.data);
-      setCustomers(custRes.data.data);
+      const productData = prodRes.data.data;
+      const productsArray = Array.isArray(productData) ? productData : (productData?.data || []);
+      setProducts(productsArray);
+      setFilteredProducts(productsArray);
+      
+      const custData = custRes.data.data;
+      setCustomers(Array.isArray(custData) ? custData : (custData?.data || []));
+      
       const orderData = orderRes.data.data;
       if (Array.isArray(orderData)) {
         setOrders(orderData);
+      } else if (orderData && orderData.data) {
+        setOrders(orderData.data);
+        setOrderPagination(orderData.pagination);
       } else if (orderData && orderData.items) {
         setOrders(orderData.items);
         setOrderPagination(orderData.pagination);
@@ -140,7 +148,12 @@ export default function Orders() {
       if (orderSearch) params.append('search', orderSearch);
       const orderRes = await api.get(`/orders?${params}`);
       const orderData = orderRes.data.data;
-      if (orderData && orderData.items) {
+      if (Array.isArray(orderData)) {
+        setOrders(orderData);
+      } else if (orderData && orderData.data) {
+        setOrders(orderData.data);
+        setOrderPagination(orderData.pagination);
+      } else if (orderData && orderData.items) {
         setOrders(orderData.items);
         setOrderPagination(orderData.pagination);
       }
