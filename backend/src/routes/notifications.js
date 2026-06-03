@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const NotificationService = require('../services/notificationService');
-const { auth } = require('../middlewares/auth');
+const { authenticate } = require('../middlewares/auth');
 
-router.use(auth);
+router.use(authenticate);
 
 router.get('/', async (req, res) => {
   try {

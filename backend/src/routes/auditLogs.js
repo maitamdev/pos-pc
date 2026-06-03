@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const AuditService = require('../services/auditService');
-const { auth, authorize } = require('../middlewares/auth');
+const { authenticate, authorize } = require('../middlewares/auth');
 
-router.use(auth);
+router.use(authenticate);
 router.use(authorize('admin'));
 
 router.get('/', async (req, res) => {

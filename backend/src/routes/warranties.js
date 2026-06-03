@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const WarrantyService = require('../services/warrantyService');
 const AuditService = require('../services/auditService');
-const { auth, authorize } = require('../middlewares/auth');
+const { authenticate, authorize } = require('../middlewares/auth');
 
-router.use(auth);
+router.use(authenticate);
 
 router.get('/', authorize('admin', 'manager', 'staff'), async (req, res) => {
   try {

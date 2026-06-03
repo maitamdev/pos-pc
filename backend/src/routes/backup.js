@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const BackupService = require('../services/backupService');
 const AuditService = require('../services/auditService');
-const { auth, authorize } = require('../middlewares/auth');
+const { authenticate, authorize } = require('../middlewares/auth');
 const path = require('path');
 
-router.use(auth);
+router.use(authenticate);
 router.use(authorize('admin'));
 
 router.post('/create', async (req, res) => {
